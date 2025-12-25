@@ -3,11 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="test.main.E2EFlow">
+      <class name="test.api.ExcelDrivenLibrary">
         <methods>
-          <include name="addNewProduct"/>
+          <include name="addBook"/>
         </methods>
-      </class> <!-- test.main.E2EFlow -->
+      </class> <!-- test.api.ExcelDrivenLibrary -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

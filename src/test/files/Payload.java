@@ -1,6 +1,15 @@
 package test.files;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.poi.sl.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import googlemapsapi.pojo.AddPlace;
 import googlemapsapi.pojo.Location;
@@ -32,7 +41,50 @@ public class Payload {
 
 	public static String addBook(String bookName, String id) {
 		return "{\r\n" + "\"name\":\"" + bookName + "\",\r\n" + "\"isbn\":\"" + id + "\",\r\n"
-				+ "\"aisle\":\"227\",\r\n" + "\"author\":\"John foe\"\r\n" + "}\r\n" + "";
+				+ "\"aisle\":\"227\",\r\n" + "\"author\":\"Pankil\"\r\n" + "}\r\n" + "";
+	}
+
+	public static String addBookStatic() {
+		return "{\r\n" + "\"name\":\"Learn Appium Automation with Java 2\",\r\n" + "\"isbn\":\"qwert\",\r\n"
+				+ "\"aisle\":\"111\",\r\n" + "\"author\":\"Pankil\"\r\n" + "}";
+	}
+
+	public static HashMap<String, Object> addBookMap() {
+		HashMap<String, Object> jsonMap = new HashMap<String, Object>();
+		jsonMap.put("name", "Learn Appium Automation with Java 2");
+		jsonMap.put("isbn", "qwert");
+		jsonMap.put("aisle", "111");
+		jsonMap.put("author", "Pankil");
+
+		return jsonMap;
+	}
+
+	public static HashMap<String, Object> addBookExcel(String testDataName) throws IOException {
+		String excelPath = "C:\\Users\\PS100160\\eclipse-workspace\\RestAPIProject\\JsonFiles\\ExcelData.xlsx";
+		HashMap<String, Object> jsonMap = new HashMap<String, Object>();
+
+		XSSFWorkbook workbook = new XSSFWorkbook(excelPath);
+		XSSFSheet sheets = null;
+		DataFormatter formatter = new DataFormatter();
+
+		int numberOfSheets = workbook.getNumberOfSheets();
+
+		for (int i = 0; i < numberOfSheets; i++) {
+			if (workbook.getSheetName(i).equalsIgnoreCase("AddBook")) {
+				sheets = workbook.getSheetAt(i);
+				break;
+			}
+		}
+
+		int numberOfRows = sheets.getLastRowNum();
+		
+		for (int i = 1; i <= numberOfRows; i++) {
+			String key = formatter.formatCellValue(sheets.getRow(i).getCell(0));
+			String value = formatter.formatCellValue(sheets.getRow(i).getCell(1));
+			jsonMap.put(key, value);
+		}
+
+		return jsonMap;
 	}
 
 	public static AddPlace addPlaceObject() {
@@ -50,7 +102,7 @@ public class Payload {
 		addPlace.setTypes(List.of("shoe park", "shop"));
 		addPlace.setWebsite("http://google.com");
 		addPlace.setLanguage("French-IN");
-		
+
 		return addPlace;
 
 	}
