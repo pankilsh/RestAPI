@@ -45,7 +45,7 @@ public class OAuthAPI {
 		return response;
 	}
 	
-	//@Test
+	@Test
 	public void getCoursePrice() {
 		String requiredCourseName = "SoapUI Webservices testing";
 		

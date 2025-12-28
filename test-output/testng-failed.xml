@@ -3,11 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="test.api.ExcelDrivenLibrary">
+      <class name="test.api.OAuthCode">
         <methods>
-          <include name="addBook"/>
+          <include name="getCourses"/>
         </methods>
-      </class> <!-- test.api.ExcelDrivenLibrary -->
+      </class> <!-- test.api.OAuthCode -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
